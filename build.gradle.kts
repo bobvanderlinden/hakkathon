@@ -7,7 +7,7 @@ val logback_version: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.3.60"
+    kotlin("jvm") version "1.3.61"
 }
 
 group = "io.github.bobvanderlinden"
