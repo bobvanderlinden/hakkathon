@@ -1,8 +1,6 @@
 package io.github.bobvanderlinden
 
 import io.ktor.application.Application
-import io.ktor.application.install
-import io.ktor.features.DefaultHeaders
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -10,4 +8,3 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
 }
-
