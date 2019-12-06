@@ -1,6 +1,17 @@
+import com.apollographql.apollo.gradle.*
+
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("com.apollographql.apollo:apollo-gradle-plugin:1.2.2")
+    }
+}
 
 plugins {
     application
@@ -27,6 +38,11 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-core-jvm:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
+
+    implementation("com.apollographql.apollo:apollo-runtime:1.2.2")
+
+    compileOnly("org.jetbrains:annotations:13.0")
+    testCompileOnly("org.jetbrains:annotations:13.0")
 }
 
 kotlin.sourceSets["main"].kotlin.srcDirs("src")
@@ -34,3 +50,9 @@ kotlin.sourceSets["test"].kotlin.srcDirs("test")
 
 sourceSets["main"].resources.srcDirs("resources")
 sourceSets["test"].resources.srcDirs("testresources")
+
+apply(plugin = "com.apollographql.android")
+
+apollo {
+    generateKotlinModels = true
+}
