@@ -1,0 +1,23 @@
+    query Query($owner: String!, $repo: String!, $number: Int!) {
+      repository(owner: $owner, name: $repo) {
+        object(expression: "HEAD:.github/label-juggler.yml") {
+          ... on Blob {
+            text
+          }
+        }
+        issueOrPullRequest(number: $number) {
+          ... on Node {
+            id
+          }
+          ... on Labelable {
+            labels(last: 100) {
+              nodes {
+                id
+                createdAt
+                name
+              }
+            }
+          }
+        }
+      }
+    }
