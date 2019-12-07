@@ -1,4 +1,4 @@
-import com.apollographql.apollo.gradle.*
+import com.apollographql.apollo.gradle.ApolloExtension
 
 val ktor_version: String by project
 val kotlin_version: String by project
@@ -53,6 +53,4 @@ sourceSets["test"].resources.srcDirs("testresources")
 
 apply(plugin = "com.apollographql.android")
 
-apollo {
-    generateKotlinModels = true
-}
+configure<ApolloExtension> { setGenerateKotlinModels(true) }
