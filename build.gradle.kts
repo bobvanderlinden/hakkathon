@@ -1,4 +1,7 @@
 import com.apollographql.apollo.gradle.ApolloExtension
+import io.kotless.DSLType
+import io.kotless.plugin.gradle.dsl.Webapp.Route53
+import io.kotless.plugin.gradle.dsl.kotless
 
 val ktor_version: String by project
 val kotlin_version: String by project
@@ -59,3 +62,39 @@ sourceSets["test"].resources.srcDirs("testresources")
 apply(plugin = "com.apollographql.android")
 
 configure<ApolloExtension> { setGenerateKotlinModels(true) }
+
+kotless {
+    config {
+        bucket = "such.spacious.very.storage.many.bucket"
+        prefix = "short"
+
+        dsl {
+            type = DSLType.Kotless
+
+            workDirectory = file("src/main/static")
+        }
+
+        terraform {
+            profile = "bleep-bloop-profile"
+            region = "eu-central-1"
+        }
+    }
+
+    webapp {
+        lambda {
+            kotless {
+                packages = setOf("io.github.bobvanderlinden")
+            }
+        }
+
+        route53 = Route53("short", "meuk.me.uk")
+    }
+
+    extensions {
+        terraform {
+            files {
+                add(file("src/main/tf/extensions.tf"))
+            }
+        }
+    }
+}
