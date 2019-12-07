@@ -1,23 +1,26 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.41"
+    kotlin("jvm") version "1.3.61"
+    application
 }
 
-group = "com.softwarebakery"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    jcenter()
+}
+
+application {
+    mainClassName = "MainKt"
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    compile(group = "io.ktor", name = "ktor-server-core", version = "1.2.6")
-    compile(group = "io.ktor", name = "ktor-server-netty", version = "1.2.6")
-//    compile(group = "com.graphql-java", name = "graphql-java", version = "11.0")
-    implementation(group = "com.github.kittinunf.fuel", name = "fuel", version = "2.2.1")
-    implementation(group = "com.github.kittinunf.fuel", name = "fuel-json", version = "2.2.1")
+    implementation(group = "io.ktor", name = "ktor-server-core", version = "1.2.6")
+    implementation(group = "io.ktor", name = "ktor-server-netty", version = "1.2.6")
+    implementation(group = "io.ktor", name = "ktor-gson", version = "1.2.6")
 }
 
 tasks.withType<KotlinCompile> {
