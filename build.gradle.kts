@@ -3,6 +3,7 @@ import com.apollographql.apollo.gradle.ApolloExtension
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
+val kotless_version: String by project
 
 buildscript {
     repositories {
@@ -16,6 +17,7 @@ buildscript {
 plugins {
     kotlin("jvm") version "1.3.61"
     application
+    id("io.kotless") version "0.1.2"
 }
 
 group = "io.github.bobvanderlinden"
@@ -44,6 +46,8 @@ dependencies {
 
     compileOnly("org.jetbrains:annotations:13.0")
     testCompileOnly("org.jetbrains:annotations:13.0")
+
+    implementation("io.kotless", "lang", kotless_version)
 }
 
 kotlin.sourceSets["main"].kotlin.srcDirs("src")
